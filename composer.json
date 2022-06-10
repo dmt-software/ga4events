@@ -19,7 +19,7 @@
         }
     ],
     "require": {
-        "jawira/case-converter": "*"
+        "jawira/case-converter": "^3"
     },
     "require-dev": {
         "phpunit/phpunit": "*",

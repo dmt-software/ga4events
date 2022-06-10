@@ -126,6 +126,26 @@ class GA4EventTest extends TestCase
         $expectedGtagWithScript = '<script type="text/javascript">gtag("event","search",{"search_term":"mret_hcraes"});</script>';
 
         $this->assertEquals($expectedGtagWithScript, GA4Helper::toGtagScript($searchEvent, true));
+    }
 
+    public function testCaseConversion()
+    {
+        $search_event = GA4Helper::search(['search_term' => 'mret_hcraes']);
+
+        $this->assertTrue(isset($search_event->searchTerm));
+
+        $searchEvent = GA4Helper::search(['searchTerm' => 'mret_hcraes']);
+
+        $this->assertTrue(isset($searchEvent->search_term));
+
+        $this->assertEquals($search_event, $searchEvent);
+
+        $searchEvent->search_term = 'mreThcraes';
+
+        $this->assertEquals($searchEvent->searchTerm, $searchEvent->search_term);
+
+        unset($searchEvent->search_term);
+
+        $this->assertFalse(isset($searchEvent->searchTerm));
     }
 }

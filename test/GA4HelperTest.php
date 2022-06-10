@@ -6,6 +6,8 @@ use DMT\GA4Events\GA4Event;
 use DMT\GA4Events\GA4Helper;
 use Exception;
 use HaydenPierce\ClassFinder\ClassFinder;
+use Jawira\CaseConverter\CaseConverterException;
+use Jawira\CaseConverter\Convert;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use ReflectionException;
@@ -29,21 +31,24 @@ class GA4HelperTest extends TestCase
     /**
      * @dataProvider provideEventClasses
      * @throws ReflectionException
+     * @throws CaseConverterException
      */
     public function testEventHelperMethod(string $eventClass)
     {
         $helperReflectionClass = new ReflectionClass(GA4Helper::class);
         $eventReflectionClass = new ReflectionClass($eventClass);
         $eventName = $eventReflectionClass->getConstant('EVENT');
+        $convert = new Convert($eventName);
+        $camelEventName = $convert->toCamel();
 
         $this->assertTrue(
-            $helperReflectionClass->hasMethod($eventName),
-            "GA4Helper is missing $eventName method"
+            $helperReflectionClass->hasMethod($camelEventName),
+            "GA4Helper is missing $camelEventName method"
         );
 
         $this->assertSame(
             $eventClass,
-            $helperReflectionClass->getMethod($eventName)->getReturnType()->getName(),
+            $helperReflectionClass->getMethod($camelEventName)->getReturnType()->getName(),
             "GA4Helper::$eventName should return a $eventClass"
         );
 
@@ -58,6 +63,10 @@ class GA4HelperTest extends TestCase
         ];
 
         $eventInstance = call_user_func([GA4Helper::class, $eventName], $defaults);
+
+        $this->assertInstanceOf($eventClass, $eventInstance);
+
+        $eventInstance = call_user_func([GA4Helper::class, $camelEventName], $defaults);
 
         $this->assertInstanceOf($eventClass, $eventInstance);
     }

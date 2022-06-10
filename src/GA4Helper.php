@@ -15,8 +15,9 @@ class GA4Helper
     /**
      * @param array $values
      * @return AddPaymentInfo
+     * @throws CaseConverterException
      */
-    public static function add_payment_info(array $values): AddPaymentInfo
+    public static function addPaymentInfo(array $values): AddPaymentInfo
     {
         return AddPaymentInfo::create($values);
     }
@@ -24,8 +25,9 @@ class GA4Helper
     /**
      * @param array $values
      * @return AddShippingInfo
+     * @throws CaseConverterException
      */
-    public static function add_shipping_info(array $values): AddShippingInfo
+    public static function addShippingInfo(array $values): AddShippingInfo
     {
         return AddShippingInfo::create($values);
     }
@@ -33,8 +35,9 @@ class GA4Helper
     /**
      * @param array $values
      * @return AddToCart
+     * @throws CaseConverterException
      */
-    public static function add_to_cart(array $values): AddToCart
+    public static function addToCart(array $values): AddToCart
     {
         return AddToCart::create($values);
     }
@@ -42,8 +45,9 @@ class GA4Helper
     /**
      * @param array $values
      * @return AddToWishlist
+     * @throws CaseConverterException
      */
-    public static function add_to_wishlist(array $values): AddToWishlist
+    public static function addToWishlist(array $values): AddToWishlist
     {
         return AddToWishlist::create($values);
     }
@@ -51,8 +55,9 @@ class GA4Helper
     /**
      * @param array $values
      * @return BeginCheckout
+     * @throws CaseConverterException
      */
-    public static function begin_checkout(array $values): BeginCheckout
+    public static function beginCheckout(array $values): BeginCheckout
     {
         return BeginCheckout::create($values);
     }
@@ -60,8 +65,9 @@ class GA4Helper
     /**
      * @param array $values
      * @return EarnVirtualCurrency
+     * @throws CaseConverterException
      */
-    public static function earn_virtual_currency(array $values): EarnVirtualCurrency
+    public static function earnVirtualCurrency(array $values): EarnVirtualCurrency
     {
         return EarnVirtualCurrency::create($values);
     }
@@ -69,8 +75,9 @@ class GA4Helper
     /**
      * @param array $values
      * @return GenerateLead
+     * @throws CaseConverterException
      */
-    public static function generate_lead(array $values): GenerateLead
+    public static function generateLead(array $values): GenerateLead
     {
         return GenerateLead::create($values);
     }
@@ -83,8 +90,9 @@ class GA4Helper
     /**
      * @param array $values
      * @return JoinGroup
+     * @throws CaseConverterException
      */
-    public static function join_group(array $values): JoinGroup
+    public static function joinGroup(array $values): JoinGroup
     {
         return JoinGroup::create($values);
     }
@@ -92,8 +100,9 @@ class GA4Helper
     /**
      * @param array $values
      * @return LevelEnd
+     * @throws CaseConverterException
      */
-    public static function level_end(array $values): LevelEnd
+    public static function levelEnd(array $values): LevelEnd
     {
         return LevelEnd::create($values);
     }
@@ -101,8 +110,9 @@ class GA4Helper
     /**
      * @param array $values
      * @return LevelStart
+     * @throws CaseConverterException
      */
-    public static function level_start(array $values): LevelStart
+    public static function levelStart(array $values): LevelStart
     {
         return LevelStart::create($values);
     }
@@ -110,8 +120,9 @@ class GA4Helper
     /**
      * @param array $values
      * @return LevelUp
+     * @throws CaseConverterException
      */
-    public static function level_up(array $values): LevelUp
+    public static function levelUp(array $values): LevelUp
     {
         return LevelUp::create($values);
     }
@@ -119,6 +130,7 @@ class GA4Helper
     /**
      * @param array $values
      * @return Login
+     * @throws CaseConverterException
      */
     public static function login(array $values): Login
     {
@@ -128,8 +140,9 @@ class GA4Helper
     /**
      * @param array $values
      * @return PostScore
+     * @throws CaseConverterException
      */
-    public static function post_score(array $values): PostScore
+    public static function postScore(array $values): PostScore
     {
         return PostScore::create($values);
     }
@@ -137,6 +150,7 @@ class GA4Helper
     /**
      * @param array $values
      * @return Purchase
+     * @throws CaseConverterException
      */
     public static function purchase(array $values): Purchase
     {
@@ -146,6 +160,7 @@ class GA4Helper
     /**
      * @param array $values
      * @return Refund
+     * @throws CaseConverterException
      */
     public static function refund(array $values): Refund
     {
@@ -155,8 +170,9 @@ class GA4Helper
     /**
      * @param array $values
      * @return RemoveFromCart
+     * @throws CaseConverterException
      */
-    public static function remove_from_cart(array $values): RemoveFromCart
+    public static function removeFromCart(array $values): RemoveFromCart
     {
         return RemoveFromCart::create($values);
     }
@@ -173,6 +189,7 @@ class GA4Helper
     /**
      * @param array $values
      * @return Search
+     * @throws CaseConverterException
      */
     public static function search(array $values): Search
     {
@@ -182,8 +199,9 @@ class GA4Helper
     /**
      * @param array $values
      * @return SelectContent
+     * @throws CaseConverterException
      */
-    public static function select_content(array $values): SelectContent
+    public static function selectContent(array $values): SelectContent
     {
         return SelectContent::create($values);
     }
@@ -191,8 +209,9 @@ class GA4Helper
     /**
      * @param array $values
      * @return SelectItem
+     * @throws CaseConverterException
      */
-    public static function select_item(array $values): SelectItem
+    public static function selectItem(array $values): SelectItem
     {
         return SelectItem::create($values);
     }
@@ -200,8 +219,9 @@ class GA4Helper
     /**
      * @param array $values
      * @return SelectPromotion
+     * @throws CaseConverterException
      */
-    public static function select_promotion(array $values): SelectPromotion
+    public static function selectPromotion(array $values): SelectPromotion
     {
         return SelectPromotion::create($values);
     }
@@ -209,6 +229,7 @@ class GA4Helper
     /**
      * @param array $values
      * @return Share
+     * @throws CaseConverterException
      */
     public static function share(array $values): Share
     {
@@ -218,8 +239,9 @@ class GA4Helper
     /**
      * @param array $values
      * @return SignUp
+     * @throws CaseConverterException
      */
-    public static function sign_up(array $values): SignUp
+    public static function signUp(array $values): SignUp
     {
         return SignUp::create($values);
     }
@@ -227,8 +249,9 @@ class GA4Helper
     /**
      * @param array $values
      * @return SpendVirtualCurrency
+     * @throws CaseConverterException
      */
-    public static function spend_virtual_currency(array $values): SpendVirtualCurrency
+    public static function spendVirtualCurrency(array $values): SpendVirtualCurrency
     {
         return SpendVirtualCurrency::create($values);
     }
@@ -259,6 +282,7 @@ class GA4Helper
     /**
      * @param GA4Event $object
      * @return array
+     * @throws CaseConverterException
      */
     public static function toDataLayer(GA4Event $object): array
     {
@@ -273,6 +297,7 @@ class GA4Helper
      * @param bool $includeScriptTag
      * @param string $dataLayer
      * @return string
+     * @throws CaseConverterException
      */
     public static function toDataLayerScript(GA4Event $object, bool $includeScriptTag = false, string $dataLayer = 'dataLayer'): string
     {
@@ -320,8 +345,9 @@ class GA4Helper
     /**
      * @param array $values
      * @return TutorialBegin
+     * @throws CaseConverterException
      */
-    public static function tutorial_begin(array $values): TutorialBegin
+    public static function tutorialBegin(array $values): TutorialBegin
     {
         return TutorialBegin::create($values);
     }
@@ -329,8 +355,9 @@ class GA4Helper
     /**
      * @param array $values
      * @return TutorialComplete
+     * @throws CaseConverterException
      */
-    public static function tutorial_complete(array $values): TutorialComplete
+    public static function tutorialComplete(array $values): TutorialComplete
     {
         return TutorialComplete::create($values);
     }
@@ -338,8 +365,9 @@ class GA4Helper
     /**
      * @param array $values
      * @return UnlockAchievement
+     * @throws CaseConverterException
      */
-    public static function unlock_achievement(array $values): UnlockAchievement
+    public static function unlockAchievement(array $values): UnlockAchievement
     {
         return UnlockAchievement::create($values);
     }
@@ -347,8 +375,9 @@ class GA4Helper
     /**
      * @param array $values
      * @return ViewCart
+     * @throws CaseConverterException
      */
-    public static function view_cart(array $values): ViewCart
+    public static function viewCart(array $values): ViewCart
     {
         return ViewCart::create($values);
     }
@@ -356,8 +385,9 @@ class GA4Helper
     /**
      * @param array $values
      * @return ViewItem
+     * @throws CaseConverterException
      */
-    public static function view_item(array $values): ViewItem
+    public static function viewItem(array $values): ViewItem
     {
         return ViewItem::create($values);
     }
@@ -365,8 +395,9 @@ class GA4Helper
     /**
      * @param array $values
      * @return ViewItemList
+     * @throws CaseConverterException
      */
-    public static function view_item_list(array $values): ViewItemList
+    public static function viewItemList(array $values): ViewItemList
     {
         return ViewItemList::create($values);
     }
@@ -374,8 +405,9 @@ class GA4Helper
     /**
      * @param array $values
      * @return ViewPromotion
+     * @throws CaseConverterException
      */
-    public static function view_promotion(array $values): ViewPromotion
+    public static function viewPromotion(array $values): ViewPromotion
     {
         return ViewPromotion::create($values);
     }

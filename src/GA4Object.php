@@ -18,14 +18,14 @@ class GA4Object implements JsonSerializable
         $class = get_called_class();
         $instance = new $class();
 
-        foreach($values as $property => $value) {
+        foreach ($values as $property => $value) {
             $convert = new Convert($property);
 
             $camelProperty = $convert->toCamel();
 
             if (property_exists($instance, $property)) {
                 $instance->{$property} = $value;
-            } elseif(property_exists($instance, $camelProperty)) {
+            } elseif (property_exists($instance, $camelProperty)) {
                 $instance->{$camelProperty} = $value;
             }
         }

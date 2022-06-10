@@ -4,6 +4,8 @@ namespace DMT\GA4Events;
 
 class Purchase extends GA4Event
 {
+    use HasItems;
+
     public const EVENT = 'purchase';
 
     public string $currency;
@@ -13,6 +15,4 @@ class Purchase extends GA4Event
     public ?string $coupon = null;
     public ?float $shipping = null;
     public ?float $tax = null;
-
-    use HasItems;
 }

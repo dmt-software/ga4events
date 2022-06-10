@@ -21,11 +21,19 @@ class GA4EventTest extends TestCase
     {
         $classes = ClassFinder::getClassesInNamespace('DMT\GA4Events');
 
-        $classes = array_filter($classes, function($c) {
-            return is_subclass_of($c, GA4Event::class);
-        });
+        $classes = array_filter(
+            $classes,
+            function ($c) {
+                return is_subclass_of($c, GA4Event::class);
+            }
+        );
 
-        return array_map(function($c) { return [$c]; }, $classes);
+        return array_map(
+            function ($c) {
+                return [$c];
+            },
+            $classes
+        );
     }
 
     /**

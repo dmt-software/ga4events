@@ -82,6 +82,11 @@ class GA4Helper
         return GenerateLead::create($values);
     }
 
+    /**
+     * @param array $values
+     * @return Item
+     * @throws CaseConverterException
+     */
     public static function item(array $values): Item
     {
         return Item::create($values);
@@ -265,13 +270,13 @@ class GA4Helper
     {
         $data = [];
 
-        foreach(get_object_vars($object) as $property => $value) {
+        foreach (get_object_vars($object) as $property => $value) {
             $convert = new Convert($property);
             $snakeProperty = $convert->toSnake();
 
-            if(is_array($value)) {
+            if (is_array($value)) {
                 $data[$snakeProperty] = array_values(array_map([get_called_class(), 'serialize'], $value));
-            } elseif(!is_null($value)) {
+            } elseif (!is_null($value)) {
                 $data[$snakeProperty] = $value;
             }
         }
@@ -303,7 +308,8 @@ class GA4Helper
     {
         $script = sprintf(
             '%s.push(%s);',
-            $dataLayer, json_encode(static::toDataLayer($object))
+            $dataLayer,
+            json_encode(static::toDataLayer($object))
         );
 
         if ($includeScriptTag) {
@@ -332,7 +338,8 @@ class GA4Helper
     {
         $script = sprintf(
             '%s(%s);',
-            $gtag, substr(json_encode(static::toGtag($object)), 1, -1)
+            $gtag,
+            substr(json_encode(static::toGtag($object)), 1, -1)
         );
 
         if ($includeScriptTag) {

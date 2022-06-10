@@ -2,6 +2,9 @@
 
 namespace DMT\GA4Events;
 
+use Jawira\CaseConverter\CaseConverterException;
+use Jawira\CaseConverter\Convert;
+
 /**
  * Google Analytics 4 helper
  *
@@ -233,16 +236,20 @@ class GA4Helper
     /**
      * @param GA4Object $object
      * @return array
+     * @throws CaseConverterException
      */
     public static function serialize(GA4Object $object): array
     {
-        $data = get_object_vars($object);
+        $data = [];
 
-        foreach(array_keys($data) as $property) {
-            if(is_array($data[$property])) {
-                $data[$property] = array_values(array_map([GA4Helper::class, 'serialize'], $data[$property]));
-            } elseif(is_null($data[$property])) {
-                unset($data[$property]);
+        foreach(get_object_vars($object) as $property => $value) {
+            $convert = new Convert($property);
+            $snakeProperty = $convert->toSnake();
+
+            if(is_array($value)) {
+                $data[$snakeProperty] = array_values(array_map([get_called_class(), 'serialize'], $value));
+            } elseif(!is_null($value)) {
+                $data[$snakeProperty] = $value;
             }
         }
 
@@ -371,5 +378,20 @@ class GA4Helper
     public static function view_promotion(array $values): ViewPromotion
     {
         return ViewPromotion::create($values);
+    }
+
+    /**
+     * @param string $name
+     * @param array $arguments
+     * @return mixed
+     * @throws CaseConverterException
+     */
+    public static function __callStatic(string $name, array $arguments)
+    {
+        $convert = new Convert($name);
+
+        $camelName = $convert->toCamel();
+
+        return call_user_func_array([get_called_class(), $camelName], $arguments);
     }
 }

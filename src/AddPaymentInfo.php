@@ -9,7 +9,7 @@ class AddPaymentInfo extends GA4Event
     public string $currency;
     public float $value;
     public ?string $coupon = null;
-    public ?string $payment_type = null;
+    public ?string $paymentType = null;
 
     use HasItems;
 }

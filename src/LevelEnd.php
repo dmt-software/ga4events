@@ -6,6 +6,6 @@ class LevelEnd extends GA4Event
 {
     public const EVENT = 'level_end';
 
-    public ?string $level_name = null;
+    public ?string $levelName = null;
     public ?bool $success = null;
 }

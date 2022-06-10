@@ -6,8 +6,8 @@ class SelectItem extends GA4Event
 {
     public const EVENT = 'select_item';
 
-    public ?string $item_list_id;
-    public ?string $item_list_name;
+    public ?string $itemListId;
+    public ?string $itemListName;
 
     use HasItems;
 }

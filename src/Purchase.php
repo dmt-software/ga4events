@@ -7,7 +7,7 @@ class Purchase extends GA4Event
     public const EVENT = 'purchase';
 
     public string $currency;
-    public string $transaction_id;
+    public string $transactionId;
     public float $value;
     public ?string $affiliation = null;
     public ?string $coupon = null;

@@ -6,5 +6,5 @@ class Search extends GA4Event
 {
     public const EVENT = 'search';
 
-    public string $search_term;
+    public string $searchTerm;
 }

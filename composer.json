@@ -18,8 +18,10 @@
             "email": "lingo@de-mes.nl"
         }
     ],
+    "require": {
+        "jawira/case-converter": "*"
+    },
     "require-dev": {
-        "jawira/case-converter": "*",
         "phpunit/phpunit": "*",
         "haydenpierce/class-finder": "*"
     }

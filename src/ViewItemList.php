@@ -6,8 +6,8 @@ class ViewItemList extends GA4Event
 {
     public const EVENT = 'view_item_list';
 
-    public ?string $item_list_id = null;
-    public ?string $item_list_name = null;
+    public ?string $itemListId = null;
+    public ?string $itemListName = null;
 
     use HasItems;
 }

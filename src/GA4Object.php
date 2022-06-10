@@ -2,6 +2,8 @@
 
 namespace DMT\GA4Events;
 
+use Jawira\CaseConverter\CaseConverterException;
+use Jawira\CaseConverter\Convert;
 use JsonSerializable;
 
 class GA4Object implements JsonSerializable
@@ -9,16 +11,23 @@ class GA4Object implements JsonSerializable
     /**
      * @param array $values
      * @return GA4Object|static
+     * @throws CaseConverterException
      */
     public static function create(array $values): GA4Object
     {
         $class = get_called_class();
         $instance = new $class();
 
-        $class_vars = get_class_vars($class);
+        foreach($values as $property => $value) {
+            $convert = new Convert($property);
 
-        foreach($class_vars as $property => $default_value) {
-            $instance->{$property} = array_key_exists($property, $values) ? $values[$property] : $default_value;
+            $camelProperty = $convert->toCamel();
+
+            if (property_exists($instance, $property)) {
+                $instance->{$property} = $value;
+            } elseif(property_exists($instance, $camelProperty)) {
+                $instance->{$camelProperty} = $value;
+            }
         }
 
         return $instance;
@@ -26,6 +35,7 @@ class GA4Object implements JsonSerializable
 
     /**
      * @return array
+     * @throws CaseConverterException
      */
     public function serialize(): array
     {
@@ -34,9 +44,59 @@ class GA4Object implements JsonSerializable
 
     /**
      * @return array
+     * @throws CaseConverterException
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->serialize();
+    }
+
+    /**
+     * @param string $name
+     * @return mixed
+     * @throws CaseConverterException
+     */
+    public function __get(string $name)
+    {
+        $convert = new Convert($name);
+
+        return $this->{$convert->toCamel()};
+    }
+
+    /**
+     * @param string $name
+     * @return bool
+     * @throws CaseConverterException
+     */
+    public function __isset(string $name): bool
+    {
+        $convert = new Convert($name);
+
+        return isset($this->{$convert->toCamel()});
+    }
+
+    /**
+     * @param string $name
+     * @param $value
+     * @return void
+     * @throws CaseConverterException
+     */
+    public function __set(string $name, $value)
+    {
+        $convert = new Convert($name);
+
+        $this->{$convert->toCamel()} = $value;
+    }
+
+    /**
+     * @param string $name
+     * @return void
+     * @throws CaseConverterException
+     */
+    public function __unset(string $name)
+    {
+        $convert = new Convert($name);
+
+        unset($this->{$convert->toCamel()});
     }
 }

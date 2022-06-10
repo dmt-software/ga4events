@@ -9,7 +9,7 @@ class AddShippingInfo extends GA4Event
     public string $currency;
     public float $value;
     public ?string $coupon = null;
-    public ?string $shipping_tier = null;
+    public ?string $shippingTier = null;
 
     use HasItems;
 }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false">
+
+  <testsuites>
+    <testsuite name="default">
+      <directory>test/</directory>
+    </testsuite>
+    <testsuite name="Bootstrap">
+      <directory>test/</directory>
+    </testsuite>
+  </testsuites>
+
+  <filter>
+    <whitelist processUncoveredFilesFromWhitelist="true">
+      <directory suffix="php">src/</directory>
+    </whitelist>
+  </filter>
+
+  <php>
+    <!-- <includePath>.</includePath> -->
+    <!-- <ini name="error_reporting" value="E_ALL"/> -->
+    <!-- <const name="foo" value="bar"/> -->
+    <!-- <var name="foo" value="bar"/> -->
+    <!-- <env name="foo" value="bar"/> -->
+    <!-- <post name="foo" value="bar"/> -->
+    <!-- <get name="foo" value="bar"/> -->
+    <!-- <cookie name="foo" value="bar"/> -->
+    <!-- <server name="foo" value="bar"/> -->
+    <!-- <files name="foo" value="bar"/> -->
+    <!-- <request name="foo" value="bar"/> -->
+    
+    <ini name="error_reporting" value="E_ALL"/>
+    <!-- <ini name="xdebug.profile_enable" value="1"/> -->
+  </php>
+  <logging>
+<!--    <log type="coverage-html" target="/tmp/report" lowUpperBound="35" highLowerBound="70"/>-->
+<!--    <log type="coverage-clover" target="/tmp/coverage.xml"/>-->
+<!--    <log type="coverage-php" target="/tmp/coverage.serialized"/>-->
+<!--    <log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/>-->
+    <log type="junit" target="test-reports/phpunit.xml"/>
+<!--    <log type="testdox-html" target="/tmp/testdox.html"/>-->
+<!--    <log type="testdox-text" target="/tmp/testdox.txt"/>-->
+  </logging>
+</phpunit>

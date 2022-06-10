@@ -1,0 +1,26 @@
+{
+    "name": "dmt-software/ga4events",
+    "description": "Google Analytics 4 Events",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "DmtSoftware\\GA4Events\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "DmtSoftware\\GA4Events\\": "test/"
+        }
+    },
+    "authors": [
+        {
+            "name": "lingo",
+            "email": "lingo@de-mes.nl"
+        }
+    ],
+    "require-dev": {
+        "jawira/case-converter": "v3.4.6",
+        "phpunit/phpunit": "9.5.20",
+        "haydenpierce/class-finder": "0.4.3"
+    }
+}

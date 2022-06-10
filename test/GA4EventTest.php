@@ -101,5 +101,9 @@ class GA4EventTest extends TestCase
         $dataLayer = $addToCartEvent->toDataLayer();
 
         $this->assertEquals($expected, $dataLayer);
+
+        $json = json_encode($addToCartEvent);
+
+        $this->assertEquals(json_encode($expected), $json);
     }
 }

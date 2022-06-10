@@ -2,7 +2,6 @@
 
 namespace DmtSoftware\GA4Events;
 
-
 use JsonSerializable;
 
 class GA4Object implements JsonSerializable
@@ -33,6 +32,9 @@ class GA4Object implements JsonSerializable
         return GA4Helper::toDataLayer($this);
     }
 
+    /**
+     * @return array
+     */
     public function jsonSerialize()
     {
         return $this->toDataLayer();

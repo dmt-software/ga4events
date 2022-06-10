@@ -25,5 +25,8 @@
         "phpunit/phpunit": "*",
         "haydenpierce/class-finder": "*",
         "squizlabs/php_codesniffer": "*"
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
     }
 }

@@ -9,6 +9,8 @@ require_once('vendor/autoload.php');
 use DMT\GA4Events\GA4Helper;
 
 // create an event
+$searchEvent = GA4Helper::search(['searchTerm' => 'mret_hcraes']);
+// or
 $searchEvent = GA4Helper::search(['search_term' => 'mret_hcraes']);
 
 // output the event in different formats

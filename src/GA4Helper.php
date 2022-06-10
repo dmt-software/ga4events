@@ -159,6 +159,15 @@ class GA4Helper
     }
 
     /**
+     * @param string $script
+     * @return string
+     */
+    protected static function scriptWrap(string $script): string
+    {
+        return '<script type="text/javascript">' . $script . '</script>';
+    }
+
+    /**
      * @param array $values
      * @return Search
      */
@@ -225,19 +234,80 @@ class GA4Helper
      * @param GA4Object $object
      * @return array
      */
-    public static function toDataLayer(GA4Object $object): array
+    public static function serialize(GA4Object $object): array
     {
         $data = get_object_vars($object);
 
         foreach(array_keys($data) as $property) {
             if(is_array($data[$property])) {
-                $data[$property] = array_values(array_map([GA4Helper::class, 'toDataLayer'], $data[$property]));
+                $data[$property] = array_values(array_map([GA4Helper::class, 'serialize'], $data[$property]));
             } elseif(is_null($data[$property])) {
                 unset($data[$property]);
             }
         }
 
         return $data;
+    }
+
+    /**
+     * @param GA4Event $object
+     * @return array
+     */
+    public static function toDataLayer(GA4Event $object): array
+    {
+        return [
+            'event' => get_class($object)::EVENT,
+            'ecommerce' => $object->serialize(),
+        ];
+    }
+
+    /**
+     * @param GA4Event $object
+     * @param bool $includeScriptTag
+     * @param string $dataLayer
+     * @return string
+     */
+    public static function toDataLayerScript(GA4Event $object, bool $includeScriptTag = false, string $dataLayer = 'dataLayer'): string
+    {
+        $script = sprintf(
+            '%s.push(%s);',
+            $dataLayer, json_encode(static::toDataLayer($object))
+        );
+
+        if ($includeScriptTag) {
+            $script = static::scriptWrap($script);
+        }
+
+        return $script;
+    }
+
+    public static function toGtag(GA4Event $object): array
+    {
+        return [
+            'event',
+            get_class($object)::EVENT,
+            $object->serialize()
+        ];
+    }
+
+    /**
+     * @param GA4Event $object
+     * @param bool $includeScriptTag
+     * @param string $gtag
+     * @return string
+     */
+    public static function toGtagScript(GA4Event $object, bool $includeScriptTag = false, string $gtag = 'gtag'): string
+    {
+        $script = sprintf(
+            '%s(%s);',
+            $gtag, substr(json_encode(static::toGtag($object)), 1, -1)
+        );
+
+        if ($includeScriptTag) {
+            $script = static::scriptWrap($script);
+        }
+
+        return $script;
     }
 
     /**

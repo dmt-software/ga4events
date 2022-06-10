@@ -59,7 +59,7 @@ class GA4EventTest extends TestCase
         );
     }
 
-    public function testToDataLayer()
+    public function testSerialize()
     {
         $addToCartEvent = GA4Helper::add_to_cart([
             'currency' => 'EUR',
@@ -80,30 +80,50 @@ class GA4EventTest extends TestCase
         ]));
 
         $expected = [
-            'add_to_cart', [
-                'currency' => 'EUR',
-                'value' => 20.0,
-                'items' => [
-                    [
-                        'item_id' => 'itemA',
-                        'price' => 5.0,
-                        'quantity' => 2,
-                    ],
-                    [
-                        'item_id' => 'itemB',
-                        'price' => 10.0,
-                        'quantity' => 1,
-                    ],
-                ]
+            'currency' => 'EUR',
+            'value' => 20.0,
+            'items' => [
+                [
+                    'item_id' => 'itemA',
+                    'price' => 5.0,
+                    'quantity' => 2,
+                ],
+                [
+                    'item_id' => 'itemB',
+                    'price' => 10.0,
+                    'quantity' => 1,
+                ],
             ]
         ];
 
-        $dataLayer = $addToCartEvent->toDataLayer();
+        $jsonExpected = json_encode($expected);
 
-        $this->assertEquals($expected, $dataLayer);
+        $this->assertEquals($expected, $addToCartEvent->serialize());
 
-        $json = json_encode($addToCartEvent);
+        $this->assertEquals($jsonExpected, json_encode($addToCartEvent));
+    }
 
-        $this->assertEquals(json_encode($expected), $json);
+    public function testToScript()
+    {
+        $searchEvent = GA4Helper::search(['search_term' => 'mret_hcraes']);
+
+        // datalayer
+        $expectedDataLayer = 'dataLayer.push({"event":"search","ecommerce":{"search_term":"mret_hcraes"}});';
+
+        $this->assertEquals($expectedDataLayer, GA4Helper::toDataLayerScript($searchEvent));
+
+        $expectedDataLayerWithScript = '<script type="text/javascript">dataLayer.push({"event":"search","ecommerce":{"search_term":"mret_hcraes"}});</script>';
+
+        $this->assertEquals($expectedDataLayerWithScript, GA4Helper::toDataLayerScript($searchEvent, true));
+
+        // gtag
+        $expectedGtag = 'gtag("event","search",{"search_term":"mret_hcraes"});';
+
+        $this->assertEquals($expectedGtag, GA4Helper::toGtagScript($searchEvent));
+
+        $expectedGtagWithScript = '<script type="text/javascript">gtag("event","search",{"search_term":"mret_hcraes"});</script>';
+
+        $this->assertEquals($expectedGtagWithScript, GA4Helper::toGtagScript($searchEvent, true));
+
     }
 }

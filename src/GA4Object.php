@@ -27,9 +27,9 @@ class GA4Object implements JsonSerializable
     /**
      * @return array
      */
-    public function toDataLayer(): array
+    public function serialize(): array
     {
-        return GA4Helper::toDataLayer($this);
+        return GA4Helper::serialize($this);
     }
 
     /**
@@ -37,6 +37,6 @@ class GA4Object implements JsonSerializable
      */
     public function jsonSerialize()
     {
-        return $this->toDataLayer();
+        return $this->serialize();
     }
 }

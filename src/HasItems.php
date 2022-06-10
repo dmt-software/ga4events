@@ -1,18 +1,19 @@
 <?php
 
-namespace DmtSoftware\GA4Events;
-
-use phpDocumentor\Reflection\Types\Self_;
+namespace DMT\GA4Events;
 
 trait HasItems
 {
+    /**
+     * @var array|Item[]
+     */
     public array $items = [];
 
     /**
-     * @param GA4Object $item
+     * @param Item $item
      * @return static
      */
-    public function addItem(GA4Object $item): self
+    public function addItem(Item $item): self
     {
         $this->items[] = $item;
 

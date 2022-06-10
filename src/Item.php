@@ -1,6 +1,6 @@
 <?php
 
-namespace DmtSoftware\GA4Events;
+namespace DMT\GA4Events;
 
 class Item extends GA4Object
 {

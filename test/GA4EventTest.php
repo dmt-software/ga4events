@@ -1,7 +1,9 @@
 <?php
 
-namespace DmtSoftware\GA4Events;
+namespace DMT\GA4Events\Tests;
 
+use DMT\GA4Events\GA4Event;
+use DMT\GA4Events\GA4Helper;
 use Exception;
 use HaydenPierce\ClassFinder\ClassFinder;
 use Jawira\CaseConverter\CaseConverterException;
@@ -17,7 +19,7 @@ class GA4EventTest extends TestCase
      */
     public function provideEventClasses(): array
     {
-        $classes = ClassFinder::getClassesInNamespace('DmtSoftware\GA4Events');
+        $classes = ClassFinder::getClassesInNamespace('DMT\GA4Events');
 
         $classes = array_filter($classes, function($c) {
             return is_subclass_of($c, GA4Event::class);

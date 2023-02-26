@@ -4,6 +4,7 @@ namespace DMT\GA4Events;
 
 class Item extends GA4Object
 {
+    public ?string $id = null;
     public ?string $itemId = null;
     public ?string $itemName = null;
     public ?string $affiliation = null;

@@ -17,7 +17,7 @@ class GA4EventTest extends TestCase
     /**
      * @throws Exception
      */
-    public function provideEventClasses(): array
+    public static function provideEventClasses(): array
     {
         $classes = ClassFinder::getClassesInNamespace('DMT\GA4Events');
 

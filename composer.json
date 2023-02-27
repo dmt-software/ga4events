@@ -22,7 +22,7 @@
         "jawira/case-converter": "^3"
     },
     "require-dev": {
-        "phpunit/phpunit": "*",
+        "phpunit/phpunit": "^9.5",
         "haydenpierce/class-finder": "*",
         "squizlabs/php_codesniffer": "*"
     },
